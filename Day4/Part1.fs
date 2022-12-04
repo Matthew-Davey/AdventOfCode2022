@@ -2,13 +2,8 @@ module Day4.Part1
 
 module String = let split (separator : char) (x : string) = x.Split separator
 
-let parseRange x =
-    let xs = String.split '-' x
-    Set.ofSeq { (int xs[0])..(int xs[1]) }
-
-let parseLine x =
-    let xs = String.split ',' x
-    (parseRange xs[0], parseRange xs[1])
+let parseRange = String.split '-' >> fun xs -> Set.ofSeq { (int xs[0])..(int xs[1]) }
+let parseLine = String.split ',' >> fun xs -> parseRange xs[0], parseRange xs[1]
 
 let run : string array -> unit =
     Array.map parseLine
