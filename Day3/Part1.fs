@@ -11,7 +11,7 @@ let priority = function
 | LowerCaseLetter c -> int c - 96
 | UpperCaseLetter c -> int c - 38
 
-let run : (string array -> unit) =
+let run : string array -> unit =
     Array.map (Array.ofSeq)
     >> Array.map (function x -> Array.splitAt (Array.length x / 2) x)
     >> Array.map (Tuple.map Set)
