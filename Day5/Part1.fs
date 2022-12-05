@@ -16,7 +16,7 @@ let parsePlan =
     >> Seq.map (String.split ' ')
     >> Seq.collect (fun xs -> Seq.replicate (int xs[1]) (1, int xs[3]-1, int xs[5]-1))
 
-let applyMove (stacks : char list array) (n, a, b) =
+let applyMove stacks (n, a, b) =
     stacks |> Array.updateAt b (stacks[a][..n-1] @ stacks[b])
            |> Array.updateAt a (stacks[a][n..])
 
