@@ -1,15 +1,10 @@
 module Day1.Part1
 
-// Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
 let run : string array -> unit =
-    Array.fold (fun accumulator item ->
-        match item with
-        | "" -> []::accumulator
-        | _ -> match accumulator with
-               | [] -> [[item]]
-               | head::tail -> (item::head)::tail
-    ) []
-    >> List.map (List.map int)
-    >> List.map List.sum
-    >> List.max
+    Array.map (function
+        | "" -> fun (xs, acc) -> (acc::xs, 0)
+        | x -> fun (xs, acc) -> (xs, acc + int x)
+    )
+    >> Array.fold (fun acc fn -> fn acc) ([], 0)
+    >> fun (xs, acc) -> List.max (acc::xs)
     >> printfn "%i"
